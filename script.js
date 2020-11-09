@@ -69,3 +69,9 @@ function moveDone(e) {
         ulDo.appendChild(newLi);
     }
 }
+
+function enterkey() {
+    if (window.event.keyCode == 13) {
+        createList();
+    }
+}
