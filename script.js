@@ -1,5 +1,4 @@
 document.querySelector("#create-button").addEventListener("click", createList);
-document.querySelector(".rmv-btn").addEventListener("click", removeList);
 
 function createList() {
     const input = document.querySelector("#input-box");
@@ -9,7 +8,7 @@ function createList() {
         return;
     }
 
-    const ul = document.getElementById("list");
+    const ul = document.querySelector("#list-do");
     const count = ul.childElementCount;
 
     const li = document.createElement("li");
@@ -17,7 +16,7 @@ function createList() {
     const check = document.createElement("input");
     check.setAttribute("type", "checkbox");
     check.setAttribute("class", "btn-chk");
-    check.setAttribute("id", `done-button${count}`);
+    check.setAttribute("id", `do-button${count}`);
     check.addEventListener("click", moveDone);
     li.appendChild(check);
 
@@ -26,8 +25,9 @@ function createList() {
 
     const removeButton = document.createElement("button");
     removeButton.value = "삭제";
-    removeButton.setAttribute("class", "btn-chk");
+    removeButton.setAttribute("class", "rmv-btn");
     removeButton.setAttribute("id", `remove-button${count}`);
+    removeButton.append(document.createTextNode("삭제"));
     removeButton.addEventListener("click", removeList);
     li.appendChild(removeButton);
 
@@ -45,11 +45,27 @@ function removeList(e) {
 function moveDone(e) {
     const id = e.target.id;
     const li = document.querySelector(`#${id}`).parentNode;
-
-    const newLi = document.createElement("li");
-    newLi = li;
-
+    const newLi = li;
     li.parentNode.removeChild(li);
-    const ul = document.getElementById("#listDone");
-    ul.appendChild(newLi);
+    const ulDone = document.querySelector("#list-done");
+    const ulDo = document.querySelector("#list-do");
+    if (e.target.checked) {
+        const count = ulDone.childElementCount;
+
+        const rmvbtn = newLi.childNodes[2];
+        const donebtn = newLi.childNodes[0];
+        rmvbtn.setAttribute("id", `done-remove-button${count}`);
+        donebtn.setAttribute("id", `done-button${count}`);
+
+        ulDone.appendChild(newLi);
+    } else {
+        const count = ulDo.childElementCount;
+
+        const rmvbtn = newLi.childNodes[2];
+        const donebtn = newLi.childNodes[0];
+        rmvbtn.setAttribute("id", `remove-button${count}`);
+        donebtn.setAttribute("id", `do-button${count}`);
+
+        ulDo.appendChild(newLi);
+    }
 }

@@ -32,6 +32,11 @@
     align-items: center;
 }
 
+#input-container {
+    display: flex;
+    justify-content: space-between;
+}
+
 #input-box {
     width: 75%;
     height: 42px;
@@ -42,7 +47,7 @@
 }
 
 #create-button {
-    width: 15%;
+    width: 60px;
     height: 42px;
     background-color: #28a0ff;
     border-radius: 10px;
@@ -56,17 +61,27 @@
     width: 50%;
 }
 
-#list {
+.list {
     margin-top: 20px;
     list-style: none;
 }
 
-#list li {
+.list li {
     margin-top: 20px;
     font-size: 20px;
     display: flex;
     align-items: center;
     justify-content: space-between;
+}
+
+.rmv-btn {
+    width: 60px;
+    height: 30px;
+    background-color: red;
+    border-radius: 5px;
+    border: 0px;
+    color: white;
+    font-weight: bold;
 }
 
 .btn-chk {
