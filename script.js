@@ -8,61 +8,6 @@ let doneData = localStorage.getItem("doneData")
     ? localStorage.getItem("doneData").split(",")
     : [];
 
-doData.map((data) => {
-    const ul = document.querySelector("#list-do");
-    const unique = (Math.random() * 100).toFixed(0);
-
-    const li = document.createElement("li");
-
-    const check = document.createElement("input");
-    check.setAttribute("type", "checkbox");
-    check.setAttribute("class", "btn-chk");
-    check.setAttribute("id", `do-button-${unique}`);
-    check.addEventListener("click", moveDone);
-    li.appendChild(check);
-
-    const node = document.createTextNode(data);
-    li.appendChild(node);
-
-    const removeButton = document.createElement("button");
-    removeButton.value = "삭제";
-    removeButton.setAttribute("class", "rmv-btn");
-    removeButton.setAttribute("id", `remove-button-${unique}`);
-    removeButton.append(document.createTextNode("삭제"));
-    removeButton.addEventListener("click", removeList);
-    li.appendChild(removeButton);
-
-    ul.appendChild(li);
-});
-
-doneData.map((data) => {
-    const ul = document.querySelector("#list-done");
-    const unique = (Math.random() * 100).toFixed(0);
-
-    const li = document.createElement("li");
-
-    const check = document.createElement("input");
-    check.setAttribute("type", "checkbox");
-    check.setAttribute("class", "btn-chk");
-    check.setAttribute("checked", true);
-    check.setAttribute("id", `do-button-${unique}`);
-    check.addEventListener("click", moveDone);
-    li.appendChild(check);
-
-    const node = document.createTextNode(data);
-    li.appendChild(node);
-
-    const removeButton = document.createElement("button");
-    removeButton.value = "삭제";
-    removeButton.setAttribute("class", "rmv-btn");
-    removeButton.setAttribute("id", `remove-button-${unique}`);
-    removeButton.append(document.createTextNode("삭제"));
-    removeButton.addEventListener("click", removeList);
-    li.appendChild(removeButton);
-
-    ul.appendChild(li);
-});
-
 function createList() {
     const input = document.querySelector("#input-box");
 
@@ -173,3 +118,86 @@ function enterkey() {
         createList();
     }
 }
+
+function clock() {
+    const clockTarget = document.getElementById("clock");
+
+    const date = new Date();
+    const month = date.getMonth();
+    const clockDate = date.getDate();
+    const day = date.getDay();
+
+    const week = ["일", "월", "화", "수", "목", "금", "토"];
+    const hours = date.getHours();
+    const minutes = date.getMinutes();
+    const seconds = date.getSeconds();
+
+    clockTarget.innerText =
+        `${month + 1}월 ${clockDate}일 ${week[day]}요일 ` +
+        `${hours < 10 ? `0${hours}` : hours}:${
+            minutes < 10 ? `0${minutes}` : minutes
+        }:${seconds < 10 ? `0${seconds}` : seconds}`;
+}
+
+function init() {
+    clock();
+
+    doData.map((data) => {
+        const ul = document.querySelector("#list-do");
+        const unique = (Math.random() * 100).toFixed(0);
+
+        const li = document.createElement("li");
+
+        const check = document.createElement("input");
+        check.setAttribute("type", "checkbox");
+        check.setAttribute("class", "btn-chk");
+        check.setAttribute("id", `do-button-${unique}`);
+        check.addEventListener("click", moveDone);
+        li.appendChild(check);
+
+        const node = document.createTextNode(data);
+        li.appendChild(node);
+
+        const removeButton = document.createElement("button");
+        removeButton.value = "삭제";
+        removeButton.setAttribute("class", "rmv-btn");
+        removeButton.setAttribute("id", `remove-button-${unique}`);
+        removeButton.append(document.createTextNode("삭제"));
+        removeButton.addEventListener("click", removeList);
+        li.appendChild(removeButton);
+
+        ul.appendChild(li);
+    });
+
+    doneData.map((data) => {
+        const ul = document.querySelector("#list-done");
+        const unique = (Math.random() * 100).toFixed(0);
+
+        const li = document.createElement("li");
+
+        const check = document.createElement("input");
+        check.setAttribute("type", "checkbox");
+        check.setAttribute("class", "btn-chk");
+        check.setAttribute("checked", true);
+        check.setAttribute("id", `do-button-${unique}`);
+        check.addEventListener("click", moveDone);
+        li.appendChild(check);
+
+        const node = document.createTextNode(data);
+        li.appendChild(node);
+
+        const removeButton = document.createElement("button");
+        removeButton.value = "삭제";
+        removeButton.setAttribute("class", "rmv-btn");
+        removeButton.setAttribute("id", `remove-button-${unique}`);
+        removeButton.append(document.createTextNode("삭제"));
+        removeButton.addEventListener("click", removeList);
+        li.appendChild(removeButton);
+
+        ul.appendChild(li);
+    });
+
+    setInterval(clock, 1000);
+}
+
+init();
