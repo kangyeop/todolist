@@ -18,7 +18,7 @@
 
 #clock {
     position: absolute;
-    right:15%;
+    right: 15%;
     font-size: 20px;
 }
 
@@ -28,7 +28,7 @@
 }
 
 #container {
-    height: 81vh;
+    /* height: calc(100vh - 120px); */
     display: flex;
 }
 
@@ -104,4 +104,50 @@
 #footer {
     background-color: #ffdf65;
     height: 60px;
+    margin-top: 15px;
+}
+
+@media (max-width: 886px) {
+    #header {
+        display: flex;
+        flex-direction: column;
+        background-color: #ffdf65;
+        height: 50px;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #clock {
+        position: relative;
+        font-size: 15px;
+        right: 0px;
+    }
+
+    #title {
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+    #container {
+        display: flex;
+        flex-direction: column;
+    }
+
+    #box-container {
+        margin-top: 20px;
+        width: 70%;
+    }
+
+    .box {
+        padding-top: 40px;
+        align-items: center;
+        flex: 1;
+    }
+
+    .list {
+        margin-top: 20px;
+        list-style: none;
+        overflow: scroll;
+        height: 40vh;
+    }
 }
